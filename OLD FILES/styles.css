@@ -1,0 +1,123 @@
+@font-face {
+  font-family: "OPS Favorite";
+  src: url("/fonts/ops-favorite.woff2") format("woff2"),
+       url("/fonts/ops-favorite.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  overflow-x: hidden;
+}
+
+/* Base styles for the tab */
+.tab-container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 60vw;
+  height: 80vh;
+  background-color: #f0f0f0;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.4s ease;
+  transform: translateY(calc(100% - 10vh)); /* Sticks up 10vh */
+  z-index: 1000;
+}
+
+/* Open state */
+.tab-container.open {
+  transform: translateY(0);
+}
+
+/* Handle */
+.tab-handle {
+  height: 10vh;
+  background-color: #D2D2D2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: bold;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.tab-handle h2 {
+  font: 2.5rem "OPS Favorite", "Courier", "Lucida Console", "Arial", monospace;
+}
+
+/* Content */
+.tab-content {
+  padding: 1rem;
+  height: calc(80vh - 10vh); /* 80vh total - 10vh handle */
+  overflow-y: auto;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .tab-container {
+    left: 50%;
+    transform: translate(-50%, calc(100% - 5vh)); /* Centered and 5vh visible */
+    width: 100vw;
+    right: auto;
+  }
+
+  .tab-container.open {
+    transform: translate(-50%, 0);
+  }
+
+  .tab-handle {
+    height: 5vh;
+  }
+  .tab-handle h2 {
+    font: 2rem "OPS Favorite", "Courier", "Lucida Console", "Arial", monospace;
+  }
+
+  .tab-content {
+    height: calc(80vh - 5vh);
+  }
+}
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ensures notes grow nicely */
+  gap: 1rem;
+  padding: 1rem; /* Same left and right padding */
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.note {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  border-radius: 0.5rem;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease;
+}
+.note:hover {
+  cursor: pointer;
+}
+
+.note-text {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 2rem;
+  color: #333;
+  text-align: center;
+  word-wrap: break-word;
+}
