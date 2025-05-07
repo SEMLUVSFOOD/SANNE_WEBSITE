@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Sanne Project Tab
  * Description: Adds a floating tab with animated notes. Use shortcode [sanne_project] to display it.
- * Version: 1.0
+ * Version: 1.1
  * Author: You
  */
 
@@ -25,9 +25,13 @@ function sanne_project_shortcode($atts) {
         <div class="tab-handle"> <h2><?php echo esc_html($atts['title']); ?></h2> </div>
         <div class="tab-content">
             <div class="notes-grid" id="notesGrid">
-                <?php foreach ($notes as $note): ?>
-                    <div class="note">
-                        <div class="note-text"><?php echo esc_html(trim($note)); ?></div>
+                <?php foreach ($notes as $note): 
+                    $parts = explode('|', trim($note));
+                    $text = esc_html($parts[0]);
+                    $url = isset($parts[1]) ? esc_url($parts[1]) : '';
+                ?>
+                    <div class="note" <?php if ($url): ?>onclick="window.location.href='<?php echo $url; ?>'"<?php endif; ?>>
+                        <div class="note-text"><?php echo $text; ?></div>
                     </div>
                 <?php endforeach; ?>
             </div>
