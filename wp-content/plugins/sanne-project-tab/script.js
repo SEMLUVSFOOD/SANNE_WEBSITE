@@ -43,3 +43,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Auto-open "About" tab on first session visit
+  if (!sessionStorage.getItem('aboutTabOpened')) {
+    const aboutTab = document.querySelector('#tab-text');
+    if (aboutTab) {
+      aboutTab.classList.add('open');
+      aboutTab.style.zIndex = 2000;
+      sessionStorage.setItem('aboutTabOpened', 'true');
+    }
+  }
+});
