@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: Sanne Project Tab
- * Description: Adds a floating tab with animated notes. Use shortcode [sanne_project] to display it.
- * Version: 1.1
+ * Description: Adds floating tabs with animated notes and text, including toggle icon.
+ * Version: 2.5
  * Author: You
  */
 
@@ -19,12 +19,13 @@ function sanne_project_shortcode($atts) {
     ], $atts);
 
     $notes = explode(',', $atts['notes']);
-    ob_start();
-    ?>
-    <div class="tab-container" id="tab">
-        <div class="tab-handle"> <h2><?php echo esc_html($atts['title']); ?></h2> </div>
+    ob_start(); ?>
+    <div class="tab-container tab-right" id="tab-project">
+        <div class="tab-handle">
+            <h2><?php echo esc_html($atts['title']); ?> <span class="tab-icon" aria-hidden="true"></span></h2>
+        </div>
         <div class="tab-content">
-            <div class="notes-grid" id="notesGrid">
+            <div class="notes-grid">
                 <?php foreach ($notes as $note): 
                     $parts = explode('|', trim($note));
                     $text = esc_html($parts[0]);
@@ -37,7 +38,25 @@ function sanne_project_shortcode($atts) {
             </div>
         </div>
     </div>
-    <?php
-    return ob_get_clean();
+    <?php return ob_get_clean();
 }
 add_shortcode('sanne_project', 'sanne_project_shortcode');
+
+function sanne_text_tab_shortcode($atts) {
+    $atts = shortcode_atts([
+        'title' => 'Notes',
+        'content' => 'This is your custom text content.'
+    ], $atts);
+
+    ob_start(); ?>
+    <div class="tab-container tab-left" id="tab-text">
+        <div class="tab-handle">
+            <h2><?php echo esc_html($atts['title']); ?> <span class="tab-icon" aria-hidden="true"></span></h2>
+        </div>
+        <div class="tab-content">
+            <div class="text-body"><?php echo nl2br(wp_kses_post($atts['content'])); ?></div>
+        </div>
+    </div>
+    <?php return ob_get_clean();
+}
+add_shortcode('sanne_text_tab', 'sanne_text_tab_shortcode');
