@@ -1,9 +1,10 @@
 <?php
 /**
- * Plugin Name: Sanne Project Tab
+ * Plugin Name: Sanne Project Tabs
  * Description: Adds floating tabs with animated notes and text, including toggle icon.
  * Version: 2.5
- * Author: You
+ * Author: Sem Sannen
+ * Author URI: https://semsannen.com
  */
 
 function sanne_enqueue_assets() {
