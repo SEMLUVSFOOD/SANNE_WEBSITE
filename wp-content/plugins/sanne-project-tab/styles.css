@@ -142,7 +142,6 @@ body {
 .text-body {
   font-size: 1.2rem;
   line-height: 1.6;
-  white-space: pre-wrap;
 }
 
 /* Toggle icon (arrow ➤ to cross ✕ or rotate) */

@@ -45,9 +45,17 @@ add_shortcode('sanne_project', 'sanne_project_shortcode');
 
 function sanne_text_tab_shortcode($atts) {
     $atts = shortcode_atts([
-        'title' => 'Notes',
-        'content' => 'This is your custom text content.'
+        'title'   => 'Notes',
+        'page_id' => ''
     ], $atts);
+
+    $content = '';
+    if (!empty($atts['page_id'])) {
+        $post = get_post((int) $atts['page_id']);
+        if ($post) {
+            $content = apply_filters('the_content', $post->post_content);
+        }
+    }
 
     ob_start(); ?>
     <div class="tab-container tab-left" id="tab-text">
@@ -55,7 +63,7 @@ function sanne_text_tab_shortcode($atts) {
             <h2><?php echo esc_html($atts['title']); ?> <span class="tab-icon" aria-hidden="true"></span></h2>
         </div>
         <div class="tab-content">
-            <div class="text-body"><?php echo nl2br(wp_kses_post($atts['content'])); ?></div>
+            <div class="text-body"><?php echo $content; ?></div>
         </div>
     </div>
     <?php return ob_get_clean();
@@ -65,9 +73,17 @@ add_shortcode('sanne_text_tab', 'sanne_text_tab_shortcode');
 
 function sanne_manifest_tab_shortcode($atts) {
     $atts = shortcode_atts([
-        'title' => 'Manifest',
-        'content' => 'This is the second left tab.'
+        'title'   => 'Manifest',
+        'page_id' => ''
     ], $atts);
+
+    $content = '';
+    if (!empty($atts['page_id'])) {
+        $post = get_post((int) $atts['page_id']);
+        if ($post) {
+            $content = apply_filters('the_content', $post->post_content);
+        }
+    }
 
     ob_start(); ?>
     <div class="tab-container tab-left-secondary" id="tab-manifest">
@@ -75,7 +91,7 @@ function sanne_manifest_tab_shortcode($atts) {
             <h2><?php echo esc_html($atts['title']); ?><span class="tab-icon"></span></h2>
         </div>
         <div class="tab-content">
-            <div class="text-body"><?php echo nl2br(wp_kses_post($atts['content'])); ?></div>
+            <div class="text-body"><?php echo $content; ?></div>
         </div>
     </div>
     <?php return ob_get_clean();
