@@ -61,3 +61,23 @@ function sanne_text_tab_shortcode($atts) {
     <?php return ob_get_clean();
 }
 add_shortcode('sanne_text_tab', 'sanne_text_tab_shortcode');
+
+
+function sanne_manifest_tab_shortcode($atts) {
+    $atts = shortcode_atts([
+        'title' => 'Manifest',
+        'content' => 'This is the second left tab.'
+    ], $atts);
+
+    ob_start(); ?>
+    <div class="tab-container tab-left-secondary" id="tab-manifest">
+        <div class="tab-handle">
+            <h2><?php echo esc_html($atts['title']); ?><span class="tab-icon"></span></h2>
+        </div>
+        <div class="tab-content">
+            <div class="text-body"><?php echo nl2br(wp_kses_post($atts['content'])); ?></div>
+        </div>
+    </div>
+    <?php return ob_get_clean();
+}
+add_shortcode('sanne_manifest_tab', 'sanne_manifest_tab_shortcode');

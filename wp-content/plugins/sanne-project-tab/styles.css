@@ -17,10 +17,9 @@ body {
   position: fixed;
   bottom: 0;
   height: 80vh;
-  background-color: #f0f0f0;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); */
   transition: transform 0.4s ease, z-index 0.2s ease;
   transform: translateY(calc(100% - 6vh));
   z-index: 1000;
@@ -34,14 +33,15 @@ body {
 /* Handle */
 .tab-handle {
   height: 6vh;
-  background-color: #D2D2D2;
   display: flex;
   align-items: center;
+  width: 60%;
+  background-color: #D2D2D2;
   justify-content: center;
   cursor: pointer;
   font-weight: bold;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
+  border-radius: 0rem 1rem 0rem 0rem;
+  background-color: #FC494D;
 }
 
 .tab-handle h2 {
@@ -54,39 +54,55 @@ body {
   padding: 1rem;
   height: calc(80vh - 6vh);
   overflow-y: auto;
+  background-color: #FC494D;
+}
+.tab-left {
+  position: fixed;
+  top: 10vh;
+  left: 0;
+  width: 45vw;
+  height: 70vh;
+  background-color: #f0f0f0;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  transform: translateX(-100%);
+  transition: transform 0.4s ease, z-index 0.2s ease;
+  z-index: 1000;
 }
 
-/* Width and alignment on desktop/tablet */
-.tab-left {
-  width: 54vw;
-  max-width: 54vw;
-  left: 0;
+.tab-left.open {
+  transform: translateX(0);
 }
+
+.tab-left .tab-content {
+  height: calc(100vh - 10vh);
+  background-color: #FFAF38;
+}
+
+.tab-left .tab-handle {
+  position: absolute;
+  right: -60px;
+  width: 60px;
+  height: 215px;
+  background-color: #FFAF38;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-weight: bold;
+  font-family: "OPS Favorite", "Courier", monospace;
+  border-radius: 0rem 0rem 1rem 0rem;
+  cursor: pointer;
+}
+
 
 .tab-right {
-  width: 44vw;
-  max-width: 44vw;
+  width: 60vw;
+  max-width: 60vw;
   right: 0;
 }
 
-/* Mobile stacking */
-@media (max-width: 768px) {
-  .tab-container {
-    width: 100vw;
-    left: 0 !important;
-    right: auto;
-  }
-
-  .tab-right {
-    bottom: 0;
-    max-width: 100vw;
-  }
-
-  .tab-left {
-    bottom: 6vh;
-    max-width: 100vw;
-  }
-}
 
 /* Note grid */
 @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
@@ -103,7 +119,7 @@ body {
 .note {
   position: relative;
   background-color: #fff;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
   aspect-ratio: 1 / 1;
   display: flex;
@@ -138,10 +154,105 @@ body {
   transform: rotate(-90deg) !important;
 }
 
-.tab-container .tab-icon::after {
+.tab-icon::after {
   content: "➤";
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform 0.4s ease;
 }
 
 .tab-container.open .tab-icon::after {
-  content: "✕";
+  transform: rotate(180deg); /* or -90deg for upward */
+}
+
+
+
+.tab-left-secondary {
+  position: fixed;
+  top: calc(10vh + 220px); /* adjust based on spacing you want */
+  left: 0;
+  width: 45vw;
+  height: 70vh;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  transform: translateX(-100%);
+  transition: transform 0.4s ease, z-index 0.2s ease;
+  z-index: 999;
+}
+
+.tab-left-secondary .tab-content {
+  background-color: #0DA755;
+}
+
+.tab-left-secondary.open {
+  transform: translateX(0);
+}
+
+.tab-left-secondary .tab-handle {
+  position: absolute;
+  right: -60px;
+  width: 60px;
+  height: 185px;
+  background-color: #0DA755;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-weight: bold;
+  font-family: "OPS Favorite", "Courier", monospace;
+  border-radius: 0rem 0rem 1rem 0rem;
+  cursor: pointer;
+}
+
+
+
+/* Mobile stacking */
+@media (max-width: 768px) {
+  .tab-container {
+    width: 100vw;
+    left: 0 !important;
+    right: auto;
+  }
+
+  .tab-right {
+    bottom: 0;
+    max-width: 100vw;
+  }
+
+  .tab-left {
+    bottom: 6vh;
+    max-width: 80vw;
+  }
+  .tab-left-secondary {
+    max-width: 80vw;
+  }
+
+  .tab-left .tab-handle{
+    width: 35px;
+    height: 150px;
+    right: -35px;
+
+  }
+
+  .tab-left-secondary .tab-handle{
+    width: 35px;
+    height: 125px;
+    right: -35px;
+  }
+
+  .tab-handle h2 {
+    font-size: 1.2rem;
+  }
+  .tab-icon {
+    font-size: 1.2rem;
+  }
+
+
+  .notes-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 2fr));
+  }
+  .note-text {
+    font-size: 1.5rem;
+  }
 }
