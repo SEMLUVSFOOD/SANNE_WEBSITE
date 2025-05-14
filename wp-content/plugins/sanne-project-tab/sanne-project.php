@@ -21,7 +21,7 @@ function sanne_project_shortcode($atts) {
 
     $notes = explode(',', $atts['notes']);
     ob_start(); ?>
-    <div class="tab-container tab-right" id="tab-project">
+    <div style="z-index: 1003;" class="tab-container tab-right" id="tab-project">
         <div class="tab-handle">
             <h2><?php echo esc_html($atts['title']); ?> <span class="tab-icon" aria-hidden="true"></span></h2>
         </div>
@@ -58,7 +58,7 @@ function sanne_text_tab_shortcode($atts) {
     }
 
     ob_start(); ?>
-    <div class="tab-container tab-left" id="tab-text">
+    <div style="z-index: 2;" class="tab-container tab-left" id="tab-text">
         <div class="tab-handle">
             <h2><?php echo esc_html($atts['title']); ?> <span class="tab-icon" aria-hidden="true"></span></h2>
         </div>
@@ -86,7 +86,7 @@ function sanne_manifest_tab_shortcode($atts) {
     }
 
     ob_start(); ?>
-    <div class="tab-container tab-left-secondary" id="tab-manifest">
+    <div style="z-index: 1;" class="tab-container tab-left-secondary" id="tab-manifest">
         <div class="tab-handle">
             <h2><?php echo esc_html($atts['title']); ?><span class="tab-icon"></span></h2>
         </div>

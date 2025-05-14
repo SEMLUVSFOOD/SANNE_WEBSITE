@@ -1,31 +1,50 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Tab toggle behavior with z-index adjustment
   document.querySelectorAll('.tab-container').forEach(tab => {
+    // Store original z-index
+    let originalZ = parseInt(getComputedStyle(tab).zIndex);
+    if (!isNaN(originalZ)) {
+      tab.dataset.originalZ = originalZ;
+    }
+
     const handle = tab.querySelector('.tab-handle');
     if (!handle) return;
 
     handle.addEventListener('click', () => {
-      const isOpen = tab.classList.toggle('open');
-      tab.style.zIndex = isOpen ? '2000' : '1000';
+      const isOpen = tab.classList.contains('open');
+      const baseZ = parseInt(tab.dataset.originalZ) || 0;
+
+      if (!isOpen) {
+        // Set z-index first, then open
+        tab.style.zIndex = baseZ + 1000;
+
+        requestAnimationFrame(() => {
+          tab.classList.add('open');
+        });
+      } else {
+        // First close the tab
+        tab.classList.remove('open');
+
+        // Then lower z-index after animation
+        setTimeout(() => {
+          tab.style.zIndex = baseZ;
+        }, 400); // Match your CSS transition duration
+      }
     });
   });
 
-  // Note hover typing effect
+  // Note hover effect
   document.querySelectorAll('.note').forEach(note => {
     const textElement = note.querySelector('.note-text');
     if (!textElement) return;
-
     const fullText = textElement.textContent;
     let typing = false;
     let interval;
 
     note.addEventListener('mouseenter', () => {
       if (typing) return;
-
       typing = true;
       let i = 0;
       textElement.textContent = '';
-
       interval = setInterval(() => {
         textElement.textContent += fullText[i];
         i++;
@@ -44,15 +63,15 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-
-
 document.addEventListener('DOMContentLoaded', () => {
-  // Auto-open "About" tab on first session visit
   if (!sessionStorage.getItem('aboutTabOpened')) {
     const aboutTab = document.querySelector('#tab-text');
     if (aboutTab) {
-      aboutTab.classList.add('open');
-      aboutTab.style.zIndex = 2000;
+      const baseZ = parseInt(aboutTab.dataset.originalZ) || parseInt(getComputedStyle(aboutTab).zIndex) || 0;
+      aboutTab.style.zIndex = baseZ + 1000;
+      requestAnimationFrame(() => {
+        aboutTab.classList.add('open');
+      });
       sessionStorage.setItem('aboutTabOpened', 'true');
     }
   }
