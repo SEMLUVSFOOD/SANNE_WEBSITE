@@ -36,12 +36,11 @@ body {
   display: flex;
   align-items: center;
   width: 60%;
-  background-color: #D2D2D2;
   justify-content: center;
   cursor: pointer;
   font-weight: bold;
   border-radius: 0rem 1rem 0rem 0rem;
-  background-color: #FC494D;
+  background-color: #FF6635;
 }
 
 .tab-handle h2 {
@@ -54,7 +53,7 @@ body {
   padding: 1rem;
   height: calc(80vh - 6vh);
   overflow-y: auto;
-  background-color: #FC494D;
+  background-color: #FF6635;
 }
 .tab-left {
   position: fixed;
@@ -76,7 +75,7 @@ body {
 
 .tab-left .tab-content {
   height: calc(100vh - 10vh);
-  background-color: #FFAF38;
+  background-color: #FFC600;
 }
 
 .tab-left .tab-handle {
@@ -84,7 +83,7 @@ body {
   right: -60px;
   width: 60px;
   height: 215px;
-  background-color: #FFAF38;
+  background-color: #FFC600;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -180,7 +179,7 @@ body {
 }
 
 .tab-left-secondary .tab-content {
-  background-color: #0DA755;
+  background-color: #9CD8FF;
 }
 
 .tab-left-secondary.open {
@@ -192,7 +191,7 @@ body {
   right: -60px;
   width: 60px;
   height: 185px;
-  background-color: #0DA755;
+  background-color: #9CD8FF;
   display: flex;
   align-items: center;
   justify-content: center;
