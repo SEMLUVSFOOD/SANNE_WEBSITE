@@ -1,3 +1,13 @@
+
+:root {
+  --yellow: #FFC600;
+  --orange: #FF6635;
+  --blue: #9CD8FF;
+  --green: #C6C835;
+  --gray-bg: #f0f0f0;
+  --dark-text: #333;
+}
+
 @font-face {
   font-family: "OPS Favorite";
   src: url("/fonts/ops-favorite.woff2") format("woff2"),
@@ -12,14 +22,12 @@ body {
   overflow-x: hidden;
 }
 
-/* Base styles for the tab */
 .tab-container {
   position: fixed;
   bottom: 0;
   height: 80vh;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
-  /* box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); */
   transition: transform 0.4s ease, z-index 0.2s ease;
   transform: translateY(calc(100% - 6vh));
   z-index: 1000;
@@ -30,7 +38,6 @@ body {
   z-index: 2000;
 }
 
-/* Handle */
 .tab-handle {
   height: 6vh;
   display: flex;
@@ -40,7 +47,7 @@ body {
   cursor: pointer;
   font-weight: bold;
   border-radius: 0rem 1rem 0rem 0rem;
-  background-color: #FF6635;
+  background-color: var(--yellow);
 }
 
 .tab-handle h2 {
@@ -48,20 +55,20 @@ body {
   font-size: 1.8rem;
 }
 
-/* Content */
 .tab-content {
   padding: 1rem;
   height: calc(80vh - 6vh);
   overflow-y: auto;
-  background-color: #FF6635;
+  background-color: var(--yellow);
 }
+
 .tab-left {
   position: fixed;
   top: 10vh;
   left: 0;
   width: 45vw;
   height: 70vh;
-  background-color: #f0f0f0;
+  background-color: var(--gray-bg);
   border-top-right-radius: 1rem;
   border-bottom-right-radius: 1rem;
   transform: translateX(-100%);
@@ -75,7 +82,7 @@ body {
 
 .tab-left .tab-content {
   height: calc(100vh - 10vh);
-  background-color: #FFC600;
+  background-color: var(--green);
 }
 
 .tab-left .tab-handle {
@@ -83,7 +90,7 @@ body {
   right: -60px;
   width: 60px;
   height: 215px;
-  background-color: #FFC600;
+  background-color: var(--green);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -95,15 +102,12 @@ body {
   cursor: pointer;
 }
 
-
 .tab-right {
   width: 60vw;
   max-width: 60vw;
   right: 0;
 }
 
-
-/* Note grid */
 @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
 
 .notes-grid {
@@ -117,7 +121,7 @@ body {
 
 .note {
   position: relative;
-  background-color: #fff;
+  background-color: var(--orange);
   border-radius: 1rem;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
   aspect-ratio: 1 / 1;
@@ -133,7 +137,7 @@ body {
 .note-text {
   font-family: 'Patrick Hand', cursive;
   font-size: 2rem;
-  color: #333;
+  color: var(--dark-text);
   text-align: center;
   word-wrap: break-word;
 }
@@ -143,7 +147,6 @@ body {
   line-height: 1.6;
 }
 
-/* Toggle icon (arrow ➤ to cross ✕ or rotate) */
 .tab-icon {
   margin-left: 0.5rem;
   font-size: 2rem;
@@ -160,14 +163,12 @@ body {
 }
 
 .tab-container.open .tab-icon::after {
-  transform: rotate(180deg); /* or -90deg for upward */
+  transform: rotate(180deg);
 }
-
-
 
 .tab-left-secondary {
   position: fixed;
-  top: calc(10vh + 220px); /* adjust based on spacing you want */
+  top: calc(10vh + 220px);
   left: 0;
   width: 45vw;
   height: 70vh;
@@ -179,7 +180,7 @@ body {
 }
 
 .tab-left-secondary .tab-content {
-  background-color: #9CD8FF;
+  background-color: var(--blue);
 }
 
 .tab-left-secondary.open {
@@ -191,7 +192,7 @@ body {
   right: -60px;
   width: 60px;
   height: 185px;
-  background-color: #9CD8FF;
+  background-color: var(--blue);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -203,9 +204,6 @@ body {
   cursor: pointer;
 }
 
-
-
-/* Mobile stacking */
 @media (max-width: 768px) {
   .tab-container {
     width: 100vw;
@@ -222,18 +220,18 @@ body {
     bottom: 6vh;
     max-width: 80vw;
   }
+
   .tab-left-secondary {
     max-width: 80vw;
   }
 
-  .tab-left .tab-handle{
+  .tab-left .tab-handle {
     width: 35px;
     height: 150px;
     right: -35px;
-
   }
 
-  .tab-left-secondary .tab-handle{
+  .tab-left-secondary .tab-handle {
     width: 35px;
     height: 125px;
     right: -35px;
@@ -242,14 +240,15 @@ body {
   .tab-handle h2 {
     font-size: 1.2rem;
   }
+
   .tab-icon {
     font-size: 1.2rem;
   }
 
-
   .notes-grid {
     grid-template-columns: repeat(auto-fit, minmax(100px, 2fr));
   }
+
   .note-text {
     font-size: 1.5rem;
   }
