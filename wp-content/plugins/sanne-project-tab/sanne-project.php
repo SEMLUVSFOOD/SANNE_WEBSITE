@@ -15,33 +15,31 @@ add_action('wp_enqueue_scripts', 'sanne_enqueue_assets');
 
 function sanne_project_shortcode($atts) {
     $atts = shortcode_atts([
-        'notes' => 'Interviews,Working Title,Magazine',
-        'title' => 'Projecten'
+        'title'   => 'Projecten',
+        'page_id' => ''
     ], $atts);
 
-    $notes = explode(',', $atts['notes']);
+    $content = '';
+    if (!empty($atts['page_id'])) {
+        $post = get_post((int) $atts['page_id']);
+        if ($post) {
+            $content = apply_filters('the_content', $post->post_content);
+        }
+    }
+
     ob_start(); ?>
     <div style="z-index: 1003;" class="tab-container tab-right" id="tab-project">
         <div class="tab-handle">
             <h2><?php echo esc_html($atts['title']); ?> <span class="tab-icon" aria-hidden="true"></span></h2>
         </div>
         <div class="tab-content">
-            <div class="notes-grid">
-                <?php foreach ($notes as $note): 
-                    $parts = explode('|', trim($note));
-                    $text = esc_html($parts[0]);
-                    $url = isset($parts[1]) ? esc_url($parts[1]) : '';
-                ?>
-                    <div class="note" <?php if ($url): ?>onclick="window.location.href='<?php echo $url; ?>'"<?php endif; ?>>
-                        <div class="note-text"><?php echo $text; ?></div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
+            <?php echo $content; ?>
         </div>
     </div>
     <?php return ob_get_clean();
 }
 add_shortcode('sanne_project', 'sanne_project_shortcode');
+
 
 function sanne_text_tab_shortcode($atts) {
     $atts = shortcode_atts([
