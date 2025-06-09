@@ -55,17 +55,4 @@ document.addEventListener('DOMContentLoaded', () => {
       typing = false;
     });
   });
-
-  // Auto-open "About" tab once per session
-  if (!sessionStorage.getItem('aboutTabOpened')) {
-    const aboutTab = document.querySelector('#tab-text');
-    if (aboutTab) {
-      const baseZ = parseInt(getComputedStyle(aboutTab).zIndex) || 0;
-      aboutTab.dataset.originalZ = baseZ;
-      aboutTab.style.zIndex = baseZ + 1000;
-      aboutTab.offsetHeight; // force reflow
-      aboutTab.classList.add('open');
-      sessionStorage.setItem('aboutTabOpened', 'true');
-    }
-  }
 });
